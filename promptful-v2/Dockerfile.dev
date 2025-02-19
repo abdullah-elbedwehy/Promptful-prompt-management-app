@@ -1,0 +1,41 @@
+# Use Node.js as base image
+FROM node:18-alpine
+
+# Set working directory
+WORKDIR /app
+
+# Install development dependencies
+RUN apk add --no-cache \
+    git \
+    python3 \
+    make \
+    g++ \
+    && rm -rf /var/cache/apk/*
+
+# Install global development tools
+RUN npm install -g \
+    npm@latest \
+    typescript \
+    vite
+
+# Copy package files
+COPY package*.json ./
+
+# Install project dependencies
+RUN npm install
+
+# Copy source code
+COPY . .
+
+# Expose development port
+EXPOSE 5173
+
+# Set development environment
+ENV NODE_ENV=development
+
+# Start development server
+CMD ["npm", "run", "dev", "--", "--host", "0.0.0.0"]
+
+# Add health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD wget --quiet --tries=1 --spider http://localhost:5173 || exit 1
