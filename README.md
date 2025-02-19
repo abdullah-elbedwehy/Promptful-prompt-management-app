@@ -66,7 +66,7 @@
    Launch the backend server:
 
    ```bash
-   python run.py
+   python check_and_run.py
    ```
 
 5. **Access the Application**
