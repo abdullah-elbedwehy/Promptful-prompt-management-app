@@ -1,4 +1,4 @@
-```markdown
+
 # Promptful
 
 **Promptful** is a modern prompt management tool designed to help you organize and manage AI prompts effortlessly. Built with React, TypeScript, Flask, and SQLite, this application offers a comprehensive solution for creating, editing, and categorizing your AI prompts.
